@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import TikTokBoost, InstagramBoost, YouTubeBoost
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/authorize/login')
 def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
 
+@login_required(login_url='/authorize/login')
 def tiktok_boost(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -24,6 +27,7 @@ def tiktok_boost(request):
 
     return render(request, 'dashboard/tiktok.html')
 
+@login_required(login_url='/authorize/login')
 def instagram_boost(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -43,6 +47,8 @@ def instagram_boost(request):
 
     return render(request, 'dashboard/instagram.html')
 
+
+@login_required(login_url='/authorize/login')
 def snapchat_boost(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -62,6 +68,8 @@ def snapchat_boost(request):
 
     return render(request, 'dashboard/snapchat.html')
 
+
+@login_required(login_url='/authorize/login')
 def youtube_boost(request):
     if request.method == 'POST':
         channel_url = request.POST.get('channelUrl')
@@ -82,7 +90,7 @@ def youtube_boost(request):
     return render(request, 'dashboard/youtube.html')
 
 
-
+@login_required(login_url='/authorize/login')
 def coming_soon(request, platform):
     messages.info(request, f'{platform.capitalize()} boost feature is coming soon!')
     return redirect('dashboard')

@@ -26,7 +26,15 @@ SECRET_KEY = 'django-insecure-74^vm!xva^36kks6u^k9=barr_cgn6adm&!7$+nx-56cvtgfsa
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ascend-uhz1.onrender.com']
+ALLOWED_HOSTS = ['ascend-uhz1.onrender.com',
+                 '127.0.0.1',
+                 'localhost',
+                 'ascend-uhz1.onrender.com',
+                 'ascend-uhz1.onrender.com',
+                 'ascend-uhz1.onrender.com',
+                 
+                 
+                 ]
 
 
 # Application definition
@@ -52,7 +60,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'ascend.middleware.AuthenticationMiddleware',
 ]
+
+LOGIN_URL = '/login/' 
 
 ROOT_URLCONF = 'ascend.urls'
 
@@ -95,6 +106,7 @@ DATABASES = {
         conn_max_age=600
     )
 }
+
 
 
 
