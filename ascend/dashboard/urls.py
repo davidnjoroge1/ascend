@@ -11,6 +11,7 @@ urlpatterns = [
     path('youtube-boost/', views.youtube_boost, name='youtube_boost'),
     path('snapchat-boost/', views.snapchat_boost, name='snapchat_boost'),
     path('youtube-boost/', views.youtube_boost, name='youtube_boost'),
+    path('media/<path:path>', views.serve_media, name='serve_media'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

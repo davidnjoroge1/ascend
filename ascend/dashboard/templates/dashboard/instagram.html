@@ -265,7 +265,29 @@
                             <div class="text-center">
                                 <i class="fab fa-instagram fa-3x" style="color: #e1306c;"></i>
                             </div>
-                            <form id="instagramBoostForm" class="mt-4">
+                
+                            <!-- Payment Instructions Toggle -->
+            <div class="payment-instructions-toggle mt-4 mb-4 p-3 border rounded" style="background: #f7f7f7; border: 1px solid #ddd; cursor: pointer;" onclick="toggleInstructions()">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-info-circle fa-2x mr-2" style="color: #007bff;"></i>
+                    <h6 class="font-weight-bold mb-0">Payment Instructions</h6>
+                </div>
+                <p class="mb-0">Click here for payment details.</p>
+            </div>
+
+            <!-- Detailed Payment Instructions -->
+            <div id="paymentInstructionsDetails" class="payment-instructions-details" style="display: none;">
+                <p class="mb-0">Please make your payment using the following details:</p>
+                <ul class="list-unstyled mt-2">
+                    <li><i class="fas fa-credit-card fa-lg mr-2" style="color: #28a745;"></i><strong>Paybill:</strong> 222111</li>
+                    <li><i class="fas fa-university fa-lg mr-2" style="color: #28a745;"></i><strong>Account Number:</strong> 2428191</li>
+                </ul>
+                <p class="mt-2 mb-0">Upload a screenshot of your payment when submitting the boost request.</p>
+            </div>
+            <!-- End Detailed Payment Instructions -->
+                
+                            <form id="instagramBoostForm" class="mt-4" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
                                 <div class="form-group">
                                     <label for="instagramUsername" class="font-weight-bold">Instagram Username:</label>
                                     <input type="text" class="form-control rounded-pill shadow-sm p-3" id="instagramUsername" name="instagramUsername" required placeholder="@yourusername" style="border: 1px solid #ddd;">
@@ -289,6 +311,7 @@
                         </div>
                     </div>
                 </div>
+                
         
                 <!-- Instagram Growth Section -->
                 <div class="col-md-6 col-lg-3 mb-4">
@@ -767,6 +790,16 @@
             </div>
         </div>
     </footer>
+    <script>
+        function toggleInstructions() {
+            var details = document.getElementById('paymentInstructionsDetails');
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+        </script>
     <!-- Backend Bundle JavaScript -->
 <script src="{% static 'js/backend-bundle.min.js' %}"></script>
 
