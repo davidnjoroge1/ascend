@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'authorize',
-    'home'
+    'home',
+    'buy_account',
 ]
 
 MIDDLEWARE = [
@@ -88,15 +89,17 @@ WSGI_APPLICATION = 'ascend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-"""
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 """
+
 
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
@@ -107,9 +110,6 @@ DATABASES = {
         conn_max_age=600
     )
 }
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
