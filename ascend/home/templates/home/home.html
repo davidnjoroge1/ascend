@@ -1,0 +1,84 @@
+{% load static %}
+<!-- design inspired by https://www.authkit.com/ -->
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Ascend | Home</title>
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="{% static 'images/logo1.png' %}" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+    <body>
+        <!-- design inspired by https://www.authkit.com/ -->
+<div class="header">
+    <h2><a href="#" target="_blank" rel="noopener noreferrer">Ascend</a></h2>
+    <div class="mid-spot" onclick="document.body.classList.toggle('gold');"></div>
+    <button class="contact-btn" onclick="window.location.href='/authorize/login'">
+        <span class="glow"></span>
+        <span class="contact-btn-content">Login</span>
+    </button>
+  
+    <div class="spotlight">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  
+  <canvas id="particleCanvas"></canvas>
+  
+  <div class="accent-lines">
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div class="heroSubP">
+    <p>Introducing</p>
+  </div>
+  <div class="hero">
+    <div class="heroT">
+      <h2>Ascend</h2>
+      <h2>AscendX</h2>
+    </div>
+  </div>
+  <p class="heroP">The world's best platform, <br>
+    for social media boostings</p>
+  <div class="mountains">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="hero-spacer"></div>
+  
+  <div class="content-section">
+    <div class="content-acc">
+      <div></div>
+      <div></div>
+    </div>
+    <p class="subt">Revolutionary by design</p>
+    <h3 class="title">Grow. Reach your audience with <br>
+      Unmatched Versatility.</h3>
+    <p class="subp">At the core lies our revolutionary goal, <br>ensuring your social media presence is improved.</p>
+  </div>
+  <script src="{% static 'js/home.js' %}"></script>  
+    </body>
+</html>
