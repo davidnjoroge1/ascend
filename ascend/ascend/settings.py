@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'home',
     'buy_account',
     'complains',
+    'sell',
 ]
 
 MIDDLEWARE = [
@@ -98,7 +99,6 @@ DATABASES = {
 }
 
 """
-
 
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:

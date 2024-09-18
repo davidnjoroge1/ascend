@@ -13,6 +13,7 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'css/backend.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
@@ -24,7 +25,48 @@
 
     <!--scripts for javascript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-
+<style>
+    .status-badge {
+        padding: 4px 10px;
+        border-radius: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.75em;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .status-pending { background-color: #ffd700; color: #000; }
+    .status-approved { background-color: #28a745; color: #fff; }
+    .status-declined { background-color: #dc3545; color: #fff; }
+    .status-transferred { background-color: #17a2b8; color: #fff; }
+    .status-flagged { background-color: #fd7e14; color: #fff; }
+    
+    .admin-comments {
+        background-color: #f8f9fa;
+        border-left: 4px solid #007bff;
+        padding: 15px;
+        margin-top: 15px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .admin-comments-title {
+        color: #007bff;
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+    }
+    .admin-comments-content {
+        font-style: italic;
+        color: #555;
+    }
+    .sell-request {
+        transition: all 0.3s ease;
+    }
+    .sell-request:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+</style>
   <body class="  ">
     <!-- loader Start -->
     <div id="loading">
@@ -93,12 +135,6 @@
                               <img src="{% static 'icons/referal.png' %}" alt="Guide Icon" width="25" height="25">
                               <span class="ml-4">Refer</span>
                           </a>
-                      </li>
-                      <li class="">
-                        <a href="{% url 'sell' %}" class="svg-icon">
-                            <img src="{% static 'icons/sell.png' %}" alt="Guide Icon" width="25" height="25">
-                            <span class="ml-4">Sell My account</span>
-                        </a>
                       </li>
                       <li class="">
                         <a href="{% url 'complains' %}" class="svg-icon">
@@ -263,148 +299,229 @@
                   </div>
               </nav>
           </div>
-      </div>
+      </div>     
       <div class="content-page">
         <div class="container-fluid">
             <div class="row">
-                <!-- Complaint Submission Card -->
-                <div class="col-md-6 mb-4">
+                <!-- TikTok Sell Account Card -->
+                <div class="col-md-6 col-lg-6 mb-4">
                     <div class="card card-block card-stretch card-height shadow-lg rounded" style="background-color: #f9f9f9; border: none;">
                         <div class="card-body">
                             <div class="top-block d-flex align-items-center justify-content-between mb-4">
-                                <h5 class="font-weight-bold" style="color: #333;">Submit Your Complaint</h5>
-                                <span class="badge badge-primary" style="background: linear-gradient(45deg, #007bff, #0056b3); font-size: 14px;">Customer Support</span>
+                                <h5 class="font-weight-bold" style="color: #333;">Sell Your TikTok Account</h5>
+                                <span class="badge badge-primary">TikTok</span>
                             </div>
-                            <div class="text-center mb-4">
-                                <i class="fas fa-comments fa-3x" style="color: #007bff;"></i>
+                            <div class="text-center">
+                                <i class="fab fa-tiktok fa-3x" style="color: #69C9D0;"></i>
                             </div>
-    
-                            <form id="complaintForm" method="post" enctype="multipart/form-data">
+        
+                            <!-- Messages -->
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+        
+                            <!-- Warnings and Disclaimers Dropdown -->
+                            <div class="accordion mt-4" id="warningsAccordion">
+                                <div class="card">
+                                    <div class="card-header" id="warningsHeader">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#warningsCollapse" aria-expanded="true" aria-controls="warningsCollapse">
+                                                Warnings and Disclaimers
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="warningsCollapse" class="collapse" aria-labelledby="warningsHeader" data-parent="#warningsAccordion">
+                                        <div class="card-body">
+                                            <div class="alert alert-warning">
+                                                <strong>Warning:</strong> You are bidding your account. Funds will be received only when a buyer is found.You risk Account ban if found violating and impersonating other people's account.
+                                            </div>
+                                            <div class="alert alert-danger">
+                                                <strong>Note:</strong> A strict background check will be performed, including logging into your TikTok account to verify ownership. Full transfer of ownership to Ascend Management is required.
+                                            </div>
+                                            <div class="alert alert-info">
+                                                <strong>Important:</strong> Accounts with no buyer after 14 days will be returned to you, including full transfer of ownership back to you.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <!-- TikTok Sell Form -->
+                            <form id="tiktokSellForm" class="mt-4" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <label for="complaintType" class="font-weight-bold">Select Your Complaint:</label>
-                                    <select class="form-control rounded-pill shadow-sm p-3" id="complaintType" name="complaint_type" required style="border: 1px solid #ddd;">
-                                        <option value="" disabled selected>Choose a complaint type</option>
-                                        <option value="login_credentials">Login credentials not sent yet</option>
-                                        <option value="sell_account">I want to sell my account</option>
-                                        <option value="referral_expired">My referral QR code expired</option>
-                                        <option value="login_new_device">Unable to login my account on a new device</option>
-                                        <option value="payment_issue">Payment not reflected in my account</option>
-                                        <option value="account_suspended">My account has been suspended</option>
-                                        <option value="technical_error">Experiencing technical errors</option>
-                                        <option value="other">Other enquiry</option>
-                                    </select>
+                                    <label for="tiktokUsername" class="font-weight-bold">TikTok Username:</label>
+                                    <input type="text" class="form-control rounded-pill shadow-sm p-3" id="tiktokUsername" name="tiktokUsername" required placeholder="@yourusername" style="border: 1px solid #ddd;">
                                 </div>
                                 <div class="form-group">
-                                    <label for="complaintDescription" class="font-weight-bold">Complaint Description:</label>
-                                    <textarea class="form-control rounded shadow-sm p-3" id="complaintDescription" name="description" rows="5" required style="border: 1px solid #ddd;" placeholder="Please describe your complaint or enquiry in detail..."></textarea>
+                                    <label for="accountDescription" class="font-weight-bold">Account Description:</label>
+                                    <textarea class="form-control rounded shadow-sm p-3" id="accountDescription" name="accountDescription" rows="5" required style="border: 1px solid #ddd;" placeholder="Describe your account include your whatsapp number our team will each out to you..."></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="screenshotUpload" class="font-weight-bold d-flex align-items-center">
-                                        <i class="fas fa-image mr-2" style="font-size: 1.5em; color: #007bff;"></i>
-                                        Upload Screenshot (if applicable):
-                                    </label>
-                                    <input type="file" class="form-control-file" id="screenshotUpload" name="screenshot" accept="image/*" style="border: 1px solid #ddd; padding: 10px;">
+                                    <label for="accountScreenshot" class="font-weight-bold">Upload Account Screenshot or Picture:</label>
+                                    <input type="file" class="form-control-file shadow-sm" id="accountScreenshot" name="accountScreenshot" accept="image/*" required style="border: 1px solid #ddd; padding: 10px;">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block rounded-pill mt-4 shadow-sm" style="background: linear-gradient(45deg, #007bff, #0056b3); font-size: 16px;">
-                                    <i class="fas fa-paper-plane mr-2"></i>Send Complaint
-                                </button>
+                                <button type="submit" class="btn btn-primary btn-block mt-3">Sell My account</button>
                             </form>
                         </div>
                     </div>
                 </div>
-    
-                <!-- Recent Complaints Card -->
-                <div class="col-md-6 mb-4">
+        
+                <!-- Sell Requests Section -->
+                <div class="col-md-6 col-lg-6 mb-4">
                     <div class="card card-block card-stretch card-height shadow-lg rounded" style="background-color: #f9f9f9; border: none;">
                         <div class="card-body">
-                            <h5 class="font-weight-bold mb-4" style="color: #333;">Recent Complaints</h5>
-                            <div class="mb-3">
-                                <form method="get">
-                                    <label for="status-filter" class="font-weight-bold">Filter by status:</label>
-                                    <select name="status" id="status-filter" class="form-control rounded-pill shadow-sm" onchange="this.form.submit()" style="border: 1px solid #ddd;">
-                                        <option value="">All</option>
-                                        <option value="open" {% if status_filter == 'open' %}selected{% endif %}>Open</option>
-                                        <option value="in_progress" {% if status_filter == 'in_progress' %}selected{% endif %}>In Progress</option>
-                                        <option value="closed" {% if status_filter == 'closed' %}selected{% endif %}>Closed</option>
-                                    </select>
-                                </form>
-                            </div>
-                            {% for complaint in complaints %}
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h6 class="card-title">{{ complaint.get_complaint_type_display }}</h6>
-                                    <p class="card-text">{{ complaint.description|truncatewords:20 }}</p>
-                                    <p><strong>Status:</strong> <span class="badge badge-{% if complaint.status == 'open' %}warning{% elif complaint.status == 'in_progress' %}info{% else %}success{% endif %}">{{ complaint.get_status_display }}</span></p>
-                                    <p><strong>Submitted:</strong> {{ complaint.created_at|date:"F d, Y" }}</p>
-                                    {% if complaint.screenshot %}
-                                    <img src="{{ complaint.screenshot.url }}" alt="Complaint Screenshot" class="img-fluid mt-2 mb-2">
-                                    {% endif %}
-                                    {% if complaint.comments.all %}
-                                    <h6 class="mt-3">Support responses:</h6>
-                                    {% for comment in complaint.comments.all %}
-                                    <div class="card bg-light mb-2">
-                                        <div class="card-body py-2">
-                                            <p class="mb-1">{{ comment.comment }}</p>
-                                            <small class="text-muted">{{ comment.created_at|date:"F d, Y H:i" }}</small>
+                            <h5 class="font-weight-bold mb-4" style="color: #333;">Your Sell Requests</h5>
+                            {% for request in user_requests %}
+                                <div class="sell-request mb-4 p-4 border rounded">
+                                    <h6 class="mb-3">{{ request.tiktokUsername }}</h6>
+                                    <p class="mb-2">
+                                        <strong>Status:</strong> 
+                                        <span class="status-badge status-{{ request.status|lower }}">
+                                            {{ request.get_status_display }}
+                                        </span>
+                                    </p>
+                                    <p class="mb-3"><strong>Submitted:</strong> {{ request.created_at|date:"F d, Y" }}</p>
+                                    {% if request.admin_comments %}
+                                        <div class="admin-comments">
+                                            <div class="admin-comments-title">
+                                                <i class="fas fa-comment-alt mr-2"></i>Ascend's response
+                                            </div>
+                                            <p class="admin-comments-content mb-0">{{ request.admin_comments }}</p>
                                         </div>
-                                    </div>
-                                    {% endfor %}
                                     {% endif %}
+                                    <form method="post" action="{% url 'sell:delete_request' request.id %}" class="mt-3">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-trash-alt mr-1"></i>Delete Request
+                                        </button>
+                                    </form>
                                 </div>
-                            </div>
                             {% empty %}
-                            <p>No complaints found.</p>
+                                <p class="text-muted">You haven't submitted any sell requests yet.</p>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-                <!-- FAQ Section -->
-                <div class="col-md-4 col-lg-4 mb-4">
-                    <div class="card card-block card-stretch card-height shadow-lg rounded" style="background-color: #f9f9f9; border: none;">
+                <div class="col-md-12 col-lg-6">
+                    <div class="card card-block card-stretch card-height">
                         <div class="card-body">
-                            <h5 class="font-weight-bold mb-4" style="color: #333;">Frequently Asked Questions</h5>
-                            <div class="accordion" id="faqAccordion">
-                                <div class="card mb-2">
-                                    <div class="card-header" id="headingOne">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                How long does it take to process a complaint?
-                                            </button>
-                                        </h2>
-                                    </div>
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
-                                        <div class="card-body">
-                                            We aim to respond to all complaints within 1- 2 Hours. Complex issues may take longer to resolve.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card mb-2">
-                                    <div class="card-header" id="headingTwo">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Can I track the status of my complaint?
-                                            </button>
-                                        </h2>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                                        <div class="card-body">
-                                            Yes, you can track the status of your complaint by logging into your account and checking the 'My Complaints' section.
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Add more FAQ items as needed -->
+                            <div class="top-block d-flex align-items-center justify-content-between">
+                                <h5>Sell your snapchat account</h5>
+                                <span class="badge badge-warning">Snapchat</span>
                             </div>
+                            <div class="mt-5 text-center">
+                                <i class="bx bxl-snapchat fa-4x mb-4 animated-icon"></i>
+                                <h3 class="text-warning">Coming Soon!</h3>
+                                <p class="text-muted mt-2">
+                                    We're working hard to bring you the best Snapchat selling experience.
+                                    
+                                </p>
+                                <button id="notifyMeBtn" class="btn btn-outline-warning mt-3 notify-btn">
+                                    Notify Me
+                                </button>
+                        
+                                <!-- Hidden form that appears when "Notify Me" is clicked -->
+                                <div id="notifyMeForm" class="mt-4" style="display: none;">
+                                    <input type="email" id="notifyEmail" class="form-control mb-3 notify-input" placeholder="Enter your email" required>
+                                    <button id="submitEmailBtn" class="btn btn-warning notify-submit-btn">Submit</button>
+                                    <div id="successMessage" class="alert alert-success mt-3" style="display: none;" role="alert">
+                                        Notify me request submitted successfully!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <style>
+                            .animated-icon {
+                                color: #fffc00;
+                                animation: bounce 1.5s infinite;
+                            }
+                        
+                            @keyframes bounce {
+                                0%, 20%, 50%, 80%, 100% {
+                                    transform: translateY(0);
+                                }
+                                40% {
+                                    transform: translateY(-20px);
+                                }
+                                60% {
+                                    transform: translateY(-10px);
+                                }
+                            }
+                        
+                            .notify-btn {
+                                border-radius: 25px;
+                                padding: 10px 20px;
+                                font-size: 16px;
+                                transition: background-color 0.3s ease;
+                            }
+                        
+                            .notify-btn:hover {
+                                background-color: #fffc00;
+                                color: #fff;
+                            }
+                        
+                            .notify-input {
+                                border-radius: 25px;
+                                padding: 10px;
+                                width: 100%;
+                            }
+                        
+                            .notify-submit-btn {
+                                border-radius: 25px;
+                                padding: 10px 20px;
+                                font-size: 16px;
+                                width: 100%;
+                            }
+                        
+                            #successMessage {
+                                background-color: #28a745;
+                                color: #fff;
+                                border-radius: 25px;
+                                padding: 15px;
+                                font-size: 14px;
+                                text-align: center;
+                            }
+                        </style>
+                    </div>
+                </div>
+    
+                <!-- Instagram Sell Account Card (Coming Soon) -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card card-block card-stretch card-height shadow-lg rounded" style="background-color: #f9f9f9; border: none;">
+                        <div class="card-body text-center">
+                            <i class="fab fa-instagram fa-3x" style="color: #E1306C;"></i>
+                            <h5 class="font-weight-bold mt-4" style="color: #333;">Sell Your Instagram Account</h5>
+                            <p class="mt-3 text-muted">Coming Soon...</p>
+                            <button class="btn btn-outline-secondary btn-block mt-4 rounded-pill" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Youtube Sell Account Card (Coming Soon) -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card card-block card-stretch card-height shadow-lg rounded" style="background-color: #f9f9f9; border: none;">
+                        <div class="card-body text-center">
+                            <i class="fab fa-youtube fa-3x" style="color: #ff0000;"></i>
+                            <h5 class="font-weight-bold mt-4" style="color: #333;">Sell Your Youtube Account</h5>
+                            <p class="mt-3 text-muted">Coming Soon...</p>
+                            <button class="btn btn-outline-secondary btn-block mt-4 rounded-pill" disabled>Coming Soon</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-      <footer class="iq-footer">
+    
+              
+    <footer class="iq-footer">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6">
@@ -429,6 +546,24 @@
             }
         }
         </script>
+        <script>
+            document.getElementById('notifyMeBtn').addEventListener('click', function() {
+                document.getElementById('notifyMeForm').style.display = 'block';
+                this.style.display = '';  // Hide the "Notify Me" button after it's clicked
+            });
+        
+            document.getElementById('submitEmailBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+                const email = document.getElementById('notifyEmail').value;
+                
+                if (email) {
+                    // Show success message and hide the email input form
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('notifyMeForm').style.display = 'none';
+                }
+            });
+        </script>
+        
     <!-- Backend Bundle JavaScript -->
 <script src="{% static 'js/backend-bundle.min.js' %}"></script>
 
