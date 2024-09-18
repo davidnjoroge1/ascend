@@ -32,8 +32,6 @@ ALLOWED_HOSTS = ['ascend-uhz1.onrender.com',
                  'ascend-uhz1.onrender.com',
                  'ascend-uhz1.onrender.com',
                  'ascend-uhz1.onrender.com',
-                 
-                 
                  ]
 
 
@@ -50,6 +48,7 @@ INSTALLED_APPS = [
     'authorize',
     'home',
     'buy_account',
+    'complains',
 ]
 
 MIDDLEWARE = [
