@@ -27,6 +27,7 @@ urlpatterns = [
     path('buy_account/', include('buy_account.urls')),
     path('complains/', include('complains.urls')),
     path('sell/', include('sell.urls')),
+    path('refer/', include('refer.urls')),
     path('', include('home.urls')),
 
 ]

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from refer.models import ReferralProfile, Referral
 
 def register_view(request):
     if request.method == 'POST':
@@ -26,8 +26,23 @@ def register_view(request):
             user.last_name = ' '.join(full_name.split()[1:])
         user.save()
 
+        # Handle referral
+        referral_code = request.session.get('referral_code')
+        if referral_code:
+            try:
+                referrer_profile = ReferralProfile.objects.get(referral_code=referral_code)
+                Referral.objects.create(referrer=referrer_profile.user, referred_user=user)
+                del request.session['referral_code']
+            except ReferralProfile.DoesNotExist:
+                pass  # Invalid referral code, we can ignore it
+
         messages.success(request, 'Account created successfully. You can now log in.')
         return redirect('login')
+
+    # Handle GET request
+    referral_code = request.GET.get('ref')
+    if referral_code:
+        request.session['referral_code'] = referral_code
 
     return render(request, 'authorize/register.html')
 
@@ -44,15 +59,11 @@ def login_view(request):
             messages.error(request, 'Invalid email or password.')
     return render(request, 'authorize/login.html')
 
-def logout_view(request):
-    logout(request)
-    messages.info(request, 'You have been logged out.')
-    return redirect('login')
-
 @login_required
 def dashboard_view(request):
     return render(request, 'dashboard.html')
 
 def logout_view(request):
     logout(request)
+    messages.info(request, 'You have been logged out.')
     return redirect('login')

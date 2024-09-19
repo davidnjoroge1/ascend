@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="{% static 'css/backend.css' %}">
     <link rel="stylesheet" href="{% static 'css/update.css' %}">
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
     <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
     
@@ -28,8 +26,6 @@
 
     <!--scripts for javascript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
 
   <body class="  ">
     <!-- loader Start -->
@@ -83,7 +79,7 @@
                           </a>
                       </li>
                         <li class="">
-                            <a href="#" class="svg-icon">
+                            <a href="{% url 'youtube_boost' %}" class="svg-icon">
                                 <img src="{% static 'icons/youtube.png' %}" alt="Market Analysis Icon" width="25" height="25">
                                 <span class="ml-4">Youtube</span>
                             </a>
@@ -126,7 +122,7 @@
                       
                       
                         <li class="">
-                            <a href="#" class="svg-icon">
+                            <a href="{% url 'login' %}" class="svg-icon">
                                 <img src="{% static 'icons/logout.png' %}" alt="Guide Icon" width="25" height="25">
                                 <span class="ml-4">Log out</span>
                             </a>
@@ -236,7 +232,7 @@
                                                       <a class="badge badge-primary badge-card" href="#">3</a>
                                                   </div>
                                               </div>
-                                            
+                                              
                                               <a class="right-ic btn btn-primary btn-block position-relative p-2" href="#"
                                                   role="button">
                                                   View All
@@ -265,6 +261,7 @@
                                                       <a class="badge badge-primary badge-card" href="#">3</a>
                                                   </div>
                                               </div>
+                                              
                                               <a class="right-ic btn btn-primary btn-block position-relative p-2" href="#"
                                                   role="button">
                                                   View All
@@ -283,172 +280,60 @@
       <div class="content-page">
         <div class="container-fluid">
             <div class="row">
-                <!-- Snapchat Boost Section -->
                 <div class="col-md-12 col-lg-6">
                     <div class="card card-block card-stretch card-height">
                         <div class="card-body">
                             <div class="top-block d-flex align-items-center justify-content-between">
-                                <h5>Snapchat Followers Boost - Coming Soon</h5>
-                                <span class="badge badge-warning">Snapchat</span>
-                            </div>
-                            <div class="mt-5 text-center">
-                                <i class="bx bxl-snapchat fa-4x mb-4 animated-icon"></i>
-                                <h3 class="text-warning">Boost Your Snapchat Followers Coming Soon!</h3>
-                                <p class="text-muted mt-2">
-                                    We're working hard to bring you the best Snapchat boosting experience.
-                                    Stay tuned for amazing follower packages and perks like Super Streaks, advanced Story insights, and more!
-                                </p>
-                                <button id="notifyMeBtn" class="btn btn-outline-warning mt-3 notify-btn">
-                                    Notify Me
-                                </button>
-                        
-                                <!-- Hidden form that appears when "Notify Me" is clicked -->
-                                <div id="notifyMeForm" class="mt-4" style="display: none;">
-                                    <input type="email" id="notifyEmail" class="form-control mb-3 notify-input" placeholder="Enter your email" required>
-                                    <button id="submitEmailBtn" class="btn btn-warning notify-submit-btn">Submit</button>
-                                    <div id="successMessage" class="alert alert-success mt-3" style="display: none;" role="alert">
-                                        Notify me request submitted successfully!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <style>
-                            .animated-icon {
-                                color: #fffc00;
-                                animation: bounce 1.5s infinite;
-                            }
-                        
-                            @keyframes bounce {
-                                0%, 20%, 50%, 80%, 100% {
-                                    transform: translateY(0);
-                                }
-                                40% {
-                                    transform: translateY(-20px);
-                                }
-                                60% {
-                                    transform: translateY(-10px);
-                                }
-                            }
-                        
-                            .notify-btn {
-                                border-radius: 25px;
-                                padding: 10px 20px;
-                                font-size: 16px;
-                                transition: background-color 0.3s ease;
-                            }
-                        
-                            .notify-btn:hover {
-                                background-color: #fffc00;
-                                color: #fff;
-                            }
-                        
-                            .notify-input {
-                                border-radius: 25px;
-                                padding: 10px;
-                                width: 100%;
-                            }
-                        
-                            .notify-submit-btn {
-                                border-radius: 25px;
-                                padding: 10px 20px;
-                                font-size: 16px;
-                                width: 100%;
-                            }
-                        
-                            #successMessage {
-                                background-color: #28a745;
-                                color: #fff;
-                                border-radius: 25px;
-                                padding: 15px;
-                                font-size: 14px;
-                                text-align: center;
-                            }
-                        </style>
-                    </div>
-                </div>
-                        
-                <!-- Perks of 1K Snapchat Followers Section -->
-                <div class="col-md-12 col-lg-6">
-                    <div class="card card-block card-stretch card-height">
-                        <div class="card-body">
-                            <div class="top-block d-flex align-items-center justify-content-between">
-                                <h5>The Perks of Having 1K Snapchat Followers</h5>
-                                <span class="badge badge-success">Benefits</span>
+                                <h5>Your Referral Dashboard</h5>
+                                <span class="badge badge-primary">Referrals</span>
                             </div>
                             <div class="mt-3">
-                                <i class="bx bxl-snapchat fa-2x mr-3" style="color: #fffc00;"></i>
+                                <i class="fas fa-users fa-2x mr-3" style="color: #00f2ea;"></i>
                             </div>
-                            <div class="mt-3">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <h6><i class="bx bx-gift mr-2"></i> Super Streaks & Engagement</h6>
-                                        <p>Build strong relationships with your followers by maintaining super streaks and enhancing engagement with them.</p>
-                                    </li>
-                                    <li>
-                                        <h6><i class="bx bx-trending-up mr-2"></i> Increased Visibility</h6>
-                                        <p>More followers make your snaps and stories appear on a wider range of feeds, increasing your visibility and potential reach.</p>
-                                    </li>
-                                    <li>
-                                        <h6><i class="bx bx-message-square-dots mr-2"></i> Better Engagement in Group Chats</h6>
-                                        <p>With a larger audience, group chats become more interactive and engaging, fostering a stronger sense of community.</p>
-                                    </li>
-                                    <li>
-                                        <h6><i class="bx bx-trophy mr-2"></i> Unlock Snapchat Trophies</h6>
-                                        <p>More followers can help you unlock exclusive Snapchat trophies and achievements, enhancing your user experience.</p>
-                                    </li>
-                                    <li>
-                                        <h6><i class="bx bx-rocket mr-2"></i> Improved Algorithm Ranking</h6>
-                                        <p>High interaction rates with more followers help push your snaps to more people, increasing the chances of being featured.</p>
-                                    </li>
-                                    <li>
-                                        <h6><i class="bx bx-like mr-2"></i> Access to Sponsored Content</h6>
-                                        <p>With a larger following, you are more likely to attract brands and sponsorships, leading to monetization opportunities.</p>
-                                    </li>
-                                </ul>
+                            
+                            <div class="mt-4">
+                                <h6>Your Referral Code: {{ referral_code }}</h6>
+                                <p>Share this link to refer friends:</p>
+                                <input type="text" class="form-control" value="{{ referral_url }}" readonly>
+                            </div>
+                            <div class="mt-4">
+                                <h6>Your Referrals</h6>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Signup Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for referral in referrals %}
+                                        <tr>
+                                            <td>{{ referral.referred_user.username }}</td>
+                                            <td>{{ referral.signup_date|date:"Y-m-d H:i" }}</td>
+                                            <td>
+                                                {% if referral.is_active %}
+                                                    <span class="badge badge-success">Active</span>
+                                                {% else %}
+                                                    <span class="badge badge-danger">Inactive</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="3">You haven't referred anyone yet.</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-    
-                <!-- Additional Perks of Snapchat Boost Section -->
-                <div class="col-md-12 col-lg-6 mt-4">
-                    <div class="card card-block card-stretch card-height">
-                        <div class="card-body">
-                            <div class="top-block d-flex align-items-center justify-content-between">
-                                <h5>Additional Perks of Snapchat Boost</h5>
-                                <span class="badge badge-info">Extra Benefits</span>
-                            </div>
-                            <div class="mt-3">
-                                <i class="bx bxl-snapchat fa-2x mr-3" style="color: #fffc00;"></i>
-                            </div>
-                            <div class="mt-3">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <h6><i class="bx bx-video mr-2"></i> Go Live and Engage in Real-time</h6>
-                                        <p>Achieve 1K followers and get access to live streaming, allowing you to engage with followers in real time.</p>
-                                    </li>
-                                    <li>
-                                        <h6><i class="bx bx-photo-album mr-2"></i> Use Advanced Filters & Lenses</h6>
-                                        <p>Unlock exclusive filters and lenses that are only available to Snapchat users with larger followings.</p>
-                                    </li>
-                                    <li>
-                                        <h6><i class="bx bx-megaphone mr-2"></i> Increased Snap Score</h6>
-                                        <p>Higher follower count boosts your Snap Score, giving you more credibility and influence on the platform.</p>
-                                    </li>
-                                    <li>
-                                        <h6><i class="bx bx-share-alt mr-2"></i> Share Stories with Wider Audiences</h6>
-                                        <p>Your stories are more likely to go viral with a broader follower base, amplifying your message.</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
             </div>
         </div>
     </div>
+    <!-- Wrapper End-->
     <footer class="iq-footer">
         <div class="container-fluid">
             <div class="row">
@@ -464,6 +349,16 @@
             </div>
         </div>
     </footer>
+    <script>
+        function toggleInstructions() {
+            var details = document.getElementById('paymentInstructionsDetails');
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+        </script>
     <!-- Backend Bundle JavaScript -->
 <script src="{% static 'js/backend-bundle.min.js' %}"></script>
 
@@ -484,23 +379,6 @@
 
 <!-- Moment.js -->
 <script src="{% static 'vendor/moment.min.js' %}"></script>
-<script>
-    document.getElementById('notifyMeBtn').addEventListener('click', function() {
-        document.getElementById('notifyMeForm').style.display = 'block';
-        this.style.display = '';  // Hide the "Notify Me" button after it's clicked
-    });
-
-    document.getElementById('submitEmailBtn').addEventListener('click', function(event) {
-        event.preventDefault();
-        const email = document.getElementById('notifyEmail').value;
-        
-        if (email) {
-            // Show success message and hide the email input form
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('notifyMeForm').style.display = 'none';
-        }
-    });
-</script>
 
   </body>
 </html>

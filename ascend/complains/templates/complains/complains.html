@@ -14,6 +14,8 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+
     <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
     
@@ -89,16 +91,27 @@
                             </a>
                         </li>
                         <li class="">
-                          <a href="#" class="svg-icon">
-                              <img src="{% static 'icons/referal.png' %}" alt="Guide Icon" width="25" height="25">
-                              <span class="ml-4">Refer</span>
-                          </a>
-                      </li>
+                            <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
+                                <img src="{% static 'icons/referal.png' %}" alt="Guide Icon" width="25" height="25">
+                                <span class="ml-4">Refer</span>
+                            </a>
+                          </li>
                       <li class="">
                         <a href="{% url 'sell:sell' %}" class="svg-icon">
                             <img src="{% static 'icons/sell.png' %}" alt="Guide Icon" width="25" height="25">
                             <span class="ml-4">Sell My account</span>
                         </a>
+                      </li>
+                      <li class="new-updates-item">
+                        <a href="#" class="svg-icon">
+                          <img src="{% static 'icons/new.png' %}" alt="New Updates Icon" width="25" height="25" class="bounce-icon">
+                          <span class="ml-4 glow-text">New Updates</span>
+                        </a>
+                        <div class="dropdown-content">
+                          <a href="https://globalgrowthinvestment.com" target="_blank">
+                            <span class="glow-text">Global Growth Investment</span>
+                          </a>
+                        </div>
                       </li>
                       <li class="">
                         <a href="{% url 'complains' %}" class="svg-icon">
