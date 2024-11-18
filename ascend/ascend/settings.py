@@ -29,9 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['ascend-uhz1.onrender.com',
                  '127.0.0.1',
                  'localhost',
-                 'ascend-uhz1.onrender.com',
-                 'ascend-uhz1.onrender.com',
-                 'ascend-uhz1.onrender.com',
+                 '*',
+                 'globalgrowth-rrxd.onrender',
                  ]
 
 
